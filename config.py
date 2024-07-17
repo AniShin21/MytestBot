@@ -19,17 +19,17 @@ class config(object):
 load_dotenv()
 
 TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "")
-APP_ID = int(os.environ.get("APP_ID", ""))
-API_HASH = os.environ.get("API_HASH", "")
+APP_ID = int(os.environ.get("APP_ID", "08bdb932cf2815a46b2a5f17cf245bfe"))
+API_HASH = os.environ.get("API_HASH", "15646796")
 
 
-OWNER = os.environ.get("OWNER", "")  # Owner username
-OWNER_ID = int(os.environ.get("OWNER_ID", ""))  # Owner user id
+OWNER = os.environ.get("OWNER", "6450266465")  # Owner username
+OWNER_ID = int(os.environ.get("OWNER_ID", "iTz_Anayokoji"))  # Owner user id
 DB_URL = os.environ.get("DB_URL", "")
 DB_NAME = os.environ.get("DB_NAME", "")
 
 
-CHANNEL_ID = int(os.environ.get("CHANNEL_ID", ""))
+CHANNEL_ID = int(os.environ.get("CHANNEL_ID", "-1002181491329"))
 FORCE_SUB_CHANNEL1 = int(os.environ.get(
     "FORCE_SUB_CHANNEL1", "0"))
 FORCE_SUB_CHANNEL2 = int(os.environ.get(
@@ -40,7 +40,7 @@ SECONDS = int(os.getenv("SECONDS", "600"))  # auto delete in seconds
 
 
 PORT = os.environ.get("PORT", "8080")
-TG_BOT_WORKERS = int(os.environ.get("TG_BOT_WORKERS", "3"))
+TG_BOT_WORKERS = int(os.environ.get("TG_BOT_WORKERS", "2"))
 
 
 # start message
