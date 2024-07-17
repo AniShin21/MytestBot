@@ -1,5 +1,6 @@
 import os
 import logging
+from operator import add
 from logging.handlers import RotatingFileHandler
 from dotenv import load_dotenv
 from pymongo import MongoClient
