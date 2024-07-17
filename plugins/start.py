@@ -340,3 +340,137 @@ async def send_text(client: Bot, message: Message):
         msg = await message.reply(REPLY_ERROR)
         await asyncio.sleep(8)
         await msg.delete()
+    return
+
+
+@Bot.on_message(filters.command('add_admin') & filters.private & filters.user(OWNER_ID))
+async def command_add_admin(client: Bot, message: Message):
+    while True:
+        try:
+            admin_id = await client.ask(text="Enter admin id 🔢\n /cancel to cancel : ",chat_id = message.from_user.id, timeout=60)
+        except Exception as e:
+            print(e)
+            return
+        if admin_id.text == "/cancel":
+            await admin_id.reply("Cancelled 😉!")
+            return
+        try:
+            await Bot.get_users(user_ids=admin_id.text, self=client)
+            break
+        except:
+            await admin_id.reply("❌ Error 😖\n\nThe admin id is incorrect.", quote = True)
+            continue
+    if not await present_admin(admin_id.text):
+        try:
+            await add_admin(admin_id.text)
+            await message.reply(f"Added admin <code>{admin_id.text}</code> 😼")
+            try:
+                reply_markup = InlineKeyboardMarkup(
+                    [
+                        [InlineKeyboardButton("💮Join Channel💮", url=CHANNEL_LINK)]
+                    ]
+                )
+                await client.send_message(
+                    chat_id=admin_id.text,
+                    text=f"You are verified, join the channel for forwarding links for batch commands. 😁",
+                    reply_markup=reply_markup
+                )
+            except:
+                await message.reply("Failed to send invite. Please ensure that they have started the bot. ")
+        except:
+            await message.reply("Failed to add admin. 😔\nSome error occurred.")
+    else:
+        await message.reply("admin already exist. 💀")
+    return
+
+
+@Bot.on_message(filters.command('del_admin') & filters.private  & filters.user(OWNER_ID))
+async def delete_admin_command(client: Bot, message: Message):
+    while True:
+        try:
+            admin_id = await client.ask(text="Enter admin id 🔢\n /cancel to cancel : ",chat_id = message.from_user.id, timeout=60)
+        except:
+            return
+        if admin_id.text == "/cancel":
+            await admin_id.reply("Cancelled 😉!")
+            return
+        try:
+            await Bot.get_users(user_ids=admin_id.text, self=client)
+            break
+        except:
+            await admin_id.reply("❌ Error\n\nThe admin id is incorrect.", quote = True)
+            continue
+    if await present_admin(admin_id.text):
+        try:
+            await del_admin(admin_id.text)
+            await message.reply(f"Admin <code>{admin_id.text}</code> removed successfully 😀")
+        except Exception as e:
+            print(e)
+            await message.reply("Failed to remove admin. 😔\nSome error occurred.")
+    else:
+        await message.reply("admin doesn't exist. 💀")
+    return
+
+@Bot.on_message(filters.command('admins')  & filters.private & filters.private)
+async def admin_list_command(client: Bot, message: Message):
+    admin_list = await full_adminbase()
+    await message.reply(f"Full admin list 📃\n<code>{admin_list}</code>")
+    return
+
+@Bot.on_message(filters.command('ping')  & filters.private & filters.user(ADMINS))
+async def check_ping_command(client: Bot, message: Message):
+    message.reply_text("pong!! 🏓")
+    return
+
+if USE_PAYMENT:
+    @Bot.on_message(filters.command('add_prem') & filters.private & filters.user(ADMINS))
+    async def add_user_premium_command(client: Bot, message: Message):
+        while True:
+            try:
+                user_id = await client.ask(text="Enter id of user 🔢\n /cancel to cancel : ",chat_id = message.from_user.id, timeout=60)
+            except Exception as e:
+                print(e)
+                return  
+            if user_id.text == "/cancel":
+                await user_id.edit("Cancelled 😉!")
+                return
+            try:
+                await Bot.get_users(user_ids=user_id.text, self=client)
+                break
+            except:
+                await user_id.edit("❌ Error 😖\n\nThe admin id is incorrect.", quote = True)
+                continue
+        user_id = int(user_id.text)
+        while True:
+            try:
+                timeforprem = await client.ask(text="Enter the amount of time you want to provide the premium \nChoose correctly. Its not reversible.\n\n⁕ <code>1</code> for 7 days.\n⁕ <code>2</code> for 1 Month\n⁕ <code>3</code> for 3 Month\n⁕ <code>4</code> for 6 Month\n⁕ <code>5</code> for 1 year.🤑", chat_id=message.from_user.id, timeout=60)
+            except Exception as e:
+                print(e)
+                return
+            if not int(timeforprem.text) in [1, 2, 3, 4, 5]:
+                await message.reply("You have given wrong input. 😖")
+                continue
+            else:
+                break
+        timeforprem = int(timeforprem.text)
+        if timeforprem==1:
+            timestring = "7 days"
+        elif timeforprem==2:
+            timestring = "1 month"
+        elif timeforprem==3:
+            timestring = "3 month"
+        elif timeforprem==4:
+            timestring = "6 month"
+        elif timeforprem==5:
+            timestring = "1 year"
+        try:
+            await increasepremtime(user_id, timeforprem)
+            await message.reply("Premium added! 🤫")
+            await client.send_message(
+            chat_id=user_id,
+            text=f"Update for you\n\nPremium plan of {timestring} added to your account. 🤫",
+        )
+        except Exception as e:
+            print(e)
+            await message.reply("Some error occurred.\nCheck logs.. 😖\nIf you got premium added message then its ok.")
+        return
