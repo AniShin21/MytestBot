@@ -14,6 +14,7 @@ ip = response.json()['ip']
 print(f'Public IP Address: {ip}')
 
 
+class config(object):
 # Load the .env file
 load_dotenv()
 
