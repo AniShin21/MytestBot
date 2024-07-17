@@ -7,7 +7,7 @@ from pyrogram.errors import FloodWait, UserIsBlocked, InputUserDeactivated
 from bot import Bot
 from config import ADMINS, FORCE_MSG, START_MSG, CUSTOM_CAPTION, DISABLE_CHANNEL_BUTTON, PROTECT_CONTENT
 from helper_func import subscribed, decode, get_messages
-from database.database import add_user, present_user, del_user, full_userbase
+from database.database import add_admin, del_admin, full_adminbase, present_admin, add_user, present_user, del_user, full_userbase
 
 # Add time in seconds for waiting before deleting
 SECONDS = int(os.getenv("SECONDS", "600"))
