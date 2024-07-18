@@ -13,7 +13,8 @@ response = requests.get('https://api.ipify.org?format=json')
 ip = response.json()['ip']
 print(f'Public IP Address: {ip}')
 
-
+class Config(object):
+    
 # Load the .env file
 load_dotenv()
 
