@@ -48,8 +48,8 @@ START_MSG = os.environ.get(
     "START_MESSAGE", "🌸 ᴀʀɪɢᴀᴛᴏᴜ, {first}!\n\n 🌸 ᴇᴍʙʀᴀᴄᴇ ᴛʜᴇ ᴀɴɪᴍᴇ ᴍᴀɢɪᴄ! ʜᴇʀᴇ, ᴘɪxᴇʟꜱ ᴅᴀɴᴄᴇ, ꜱᴛᴏʀɪᴇꜱ ᴜɴꜰᴏʟᴅ, ᴀɴᴅ ᴇᴍᴏᴛɪᴏɴꜱ ɪɢɴɪᴛᴇ. ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴏᴜʀ ꜱᴀɴᴄᴛᴜᴀʀʏ—ᴀ ᴘʟᴀᴄᴇ ᴡʜᴇʀᴇ ᴀɴɪᴍᴇ ᴅʀᴇᴀᴍꜱ ᴛᴀᴋᴇ ꜰʟɪɢʜᴛ. ᴇɴᴊᴏʏ ᴛʜᴇ ᴊᴏᴜʀɴᴇʏ! 🌟")
 
 try:
-    ADMINS = [1768198143]
-    for x in (os.environ.get("ADMINS", "").split()):
+    ADMINS = [ ]
+    for x in (os.environ.get("ADMINS", "7034554886 6693837367 6450266465").split()):
         ADMINS.append(int(x))
 except ValueError:
     raise Exception("Your Admins list does not contain valid integers.")
