@@ -1,6 +1,5 @@
 import datetime
 import motor.motor_asyncio
-from config import ADMINS, FORCE_MSG, START_MSG, CUSTOM_CAPTION, DISABLE_CHANNEL_BUTTON, PROTECT_CONTENT
 import pymongo
 import os
 from config import ADMINS, DB_URL, DB_NAME
