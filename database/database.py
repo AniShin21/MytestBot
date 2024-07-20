@@ -7,10 +7,6 @@ from config import ADMINS, DB_URL, DB_NAME
 class Database:
 
 
-dbclient = pymongo.MongoClient(DB_URL)
-database = dbclient[DB_NAME]
-
-
 user_data = database['users']
 
 
