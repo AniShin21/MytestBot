@@ -1,6 +1,6 @@
 import datetime
 from config import ADMINS, FORCE_MSG, START_MSG, CUSTOM_CAPTION, DISABLE_CHANNEL_BUTTON, PROTECT_CONTENT
-from database.database import ban_user, remove_ban, get_ban_status, get_all_banned_user
+from database.database import Database
 
 db = Database(Config.DATABASE_URL, Config.BOT_USERNAME)
 
