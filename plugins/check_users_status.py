@@ -1,6 +1,6 @@
 import datetime
 from config import ADMINS, FORCE_MSG, START_MSG, CUSTOM_CAPTION, DISABLE_CHANNEL_BUTTON, PROTECT_CONTENT
-from handlers.database import Database
+from database.database import Database
 
 db = Database(Config.DATABASE_URL, Config.BOT_USERNAME)
 
